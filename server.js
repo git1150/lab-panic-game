@@ -3,6 +3,7 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const { Pool } = require('pg');
+require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 8787;
