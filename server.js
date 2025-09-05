@@ -393,6 +393,10 @@ app.get('/share/:shareSlug', async (req, res) => {
     `;
     
     res.send(html);
+    } catch (error) {
+        console.error('Error getting score:', error);
+        res.status(500).send('Internal server error');
+    }
 });
 
 // Helper functions for leaderboard calculations
