@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Panic</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="gameContainer">
+        <!-- Startscherm -->
+        <div id="startScreen" class="screen active">
+            <div class="title-container">
+                <h1 class="game-title">LAB PANIC</h1>
+                <div class="subtitle">Test je reflexen!</div>
+            </div>
+            
+            <button id="startButton" class="btn btn-primary">START SPEL</button>
+            
+            <div class="leaderboard-tabs">
+                <button class="tab-btn active" data-tab="weekly">Top 25 Week</button>
+                <button class="tab-btn" data-tab="alltime">Top 25 All-Time</button>
+            </div>
+            
+            <div id="leaderboardContainer" class="leaderboard-container">
+                <div id="weeklyLeaderboard" class="leaderboard active">
+                    <h3>Weekelijkse Top 25</h3>
+                    <div class="leaderboard-list" id="weeklyList">
+                        <div class="loading">Laden...</div>
+                    </div>
+                </div>
+                
+                <div id="alltimeLeaderboard" class="leaderboard">
+                    <h3>All-Time Top 25</h3>
+                    <div class="leaderboard-list" id="alltimeList">
+                        <div class="loading">Laden...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Canvas -->
+        <div id="gameScreen" class="screen">
+            <canvas id="gameCanvas"></canvas>
+            
+            <!-- UI Overlay -->
+            <div class="game-ui">
+                <div class="score-display">
+                    <span id="scoreText">Score: 0</span>
+                </div>
+                
+                <div class="lives-display">
+                    <div class="heart" id="heart1">❤️</div>
+                    <div class="heart" id="heart2">❤️</div>
+                    <div class="heart" id="heart3">❤️</div>
+                </div>
+                
+                <div class="powerup-indicator" id="powerupIndicator">
+                    <div class="powerup-icon" id="powerupIcon"></div>
+                    <div class="powerup-timer" id="powerupTimer"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Game Over Scherm -->
+        <div id="gameOverScreen" class="screen">
+            <div class="game-over-content">
+                <h2>Game Over!</h2>
+                <div class="final-score">
+                    <span>Eindscore: </span>
+                    <span id="finalScore">0</span>
+                </div>
+                
+                <div class="name-input-container">
+                    <label for="playerName">Jouw naam (max 12 tekens):</label>
+                    <input type="text" id="playerName" maxlength="12" placeholder="Jouw naam">
+                    <button id="submitScore" class="btn btn-primary">Score Opslaan</button>
+                </div>
+                
+                <div class="share-container" id="shareContainer" style="display: none;">
+                    <h4>Deel je score!</h4>
+                    <div class="share-url">
+                        <input type="text" id="shareUrl" readonly>
+                        <button id="copyUrl" class="btn btn-secondary">Kopieer</button>
+                    </div>
+                </div>
+                
+                <button id="playAgain" class="btn btn-primary">Opnieuw Spelen</button>
+                <button id="backToMenu" class="btn btn-secondary">Terug naar Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Audio Elements -->
+    <audio id="bgMusic" loop>
+        <source src="audio/background.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="popSound">
+        <source src="audio/pop.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="fizzSound">
+        <source src="audio/fizz.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="buzzerSound">
+        <source src="audio/buzzer.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="powerupSound">
+        <source src="audio/powerup.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="js/game.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
+
