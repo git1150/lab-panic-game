@@ -35,7 +35,7 @@ class LabPanicApp {
             howToPlayButton.addEventListener('click', () => this.showHowToPlay());
         }
 
-        // Back to Menu button
+        // Back to Menu button (How to Play screen)
         const backToMenuButton = document.getElementById('backToMenuButton');
         if (backToMenuButton) {
             backToMenuButton.addEventListener('click', () => this.backToMenu());
@@ -65,9 +65,9 @@ class LabPanicApp {
             playAgainButton.addEventListener('click', () => this.playAgain());
         }
 
-        const backToMenuButton = document.getElementById('backToMenu');
-        if (backToMenuButton) {
-            backToMenuButton.addEventListener('click', () => this.backToMenu());
+        const backToMenuGameOverButton = document.getElementById('backToMenu');
+        if (backToMenuGameOverButton) {
+            backToMenuGameOverButton.addEventListener('click', () => this.backToMenu());
         }
 
         const copyUrlButton = document.getElementById('copyUrl');
