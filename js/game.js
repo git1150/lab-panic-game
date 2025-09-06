@@ -563,12 +563,12 @@ class Bottle {
         // Draw Erlenmeyer flask (conical shape)
         ctx.fillStyle = this.color;
         
-        // Main conical body of the flask
+        // Main conical body of the flask (wide at bottom, narrow at top)
         ctx.beginPath();
-        ctx.moveTo(-12, 20); // Bottom left
-        ctx.lineTo(-20, -15); // Top left (narrower)
-        ctx.lineTo(20, -15); // Top right (narrower)
-        ctx.lineTo(12, 20); // Bottom right
+        ctx.moveTo(-20, 20); // Bottom left (wide)
+        ctx.lineTo(-12, -15); // Top left (narrow)
+        ctx.lineTo(12, -15); // Top right (narrow)
+        ctx.lineTo(20, 20); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         
@@ -606,10 +606,10 @@ class Bottle {
         ctx.fillStyle = this.color;
         ctx.globalAlpha = 0.7;
         ctx.beginPath();
-        ctx.moveTo(-10, 15); // Liquid level
-        ctx.lineTo(-18, -10);
-        ctx.lineTo(18, -10);
-        ctx.lineTo(10, 15);
+        ctx.moveTo(-18, 15); // Liquid level (wide at bottom)
+        ctx.lineTo(-10, -10); // Top left (narrow)
+        ctx.lineTo(10, -10); // Top right (narrow)
+        ctx.lineTo(18, 15); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         ctx.globalAlpha = 1;
@@ -689,12 +689,12 @@ class BrokenBottle {
         // Draw broken Erlenmeyer flask pieces
         ctx.fillStyle = '#ff6b6b';
         
-        // Main broken conical piece
+        // Main broken conical piece (wide at bottom, narrow at top)
         ctx.beginPath();
-        ctx.moveTo(-8, 12);
-        ctx.lineTo(-12, -8);
-        ctx.lineTo(12, -8);
-        ctx.lineTo(8, 12);
+        ctx.moveTo(-12, 12); // Bottom left (wide)
+        ctx.lineTo(-8, -8); // Top left (narrow)
+        ctx.lineTo(8, -8); // Top right (narrow)
+        ctx.lineTo(12, 12); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         

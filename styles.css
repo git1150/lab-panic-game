@@ -475,7 +475,7 @@ body {
     height: 60px;
     position: relative;
     flex-shrink: 0;
-    clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
 }
 
 .good-bottle {
