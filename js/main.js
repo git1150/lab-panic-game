@@ -275,7 +275,7 @@ class LabPanicApp {
         leaderboardContainer.style.height = `${finalHeight}px`;
         
         // Adjust list height too
-        const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 600));
+        const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 700));
         container.style.maxHeight = `${listHeight}px`;
         
         // Force main menu adjustment
@@ -298,13 +298,13 @@ class LabPanicApp {
         const titleHeight = 200; // Approximate title height
         const tabsHeight = 60;   // Approximate tabs height
         const buttonsHeight = 120; // Approximate buttons height
-        const padding = 80;      // Total padding
+        const padding = 120;     // Total padding (increased)
         
         const totalHeight = titleHeight + tabsHeight + leaderboardHeight + buttonsHeight + padding;
         
-        // Set limits
-        const minHeight = 600;
-        const maxHeight = window.innerHeight * 0.9;
+        // Set limits - allow much more height
+        const minHeight = 700;  // Increased minimum
+        const maxHeight = window.innerHeight * 0.95; // Allow more of screen height
         const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
         
         console.log(`Resizing main menu: leaderboard=${leaderboardHeight}px, total=${totalHeight}px, final=${finalHeight}px`);

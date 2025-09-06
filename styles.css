@@ -84,9 +84,9 @@ body {
     .screen#startScreen {
         height: 600px; /* Default height, will be adjusted by JavaScript */
         min-height: 600px;
-        max-height: 90vh;
+        max-height: 95vh; /* Allow more screen height */
         overflow-y: auto;
-        padding: 20px 0;
+        padding: 20px 0 60px 0; /* Add extra bottom padding */
         transition: height 0.3s ease;
     }
 }
@@ -234,17 +234,18 @@ body {
 /* Desktop leaderboard - dynamic height */
 @media (min-width: 769px) {
     .leaderboard-container {
-        max-height: 600px; /* Increased default, will be adjusted by JavaScript */
-        height: 500px; /* Increased default height */
-        margin: 1rem 0;
+        max-height: 700px; /* Further increased default, will be adjusted by JavaScript */
+        height: 600px; /* Further increased default height */
+        margin: 1rem 0 2rem 0; /* Add extra bottom margin */
         transition: max-height 0.3s ease, height 0.3s ease;
         overflow: hidden; /* Prevent content overflow */
     }
     
     .leaderboard-list {
-        max-height: 500px; /* Increased default, will be adjusted by JavaScript */
+        max-height: 600px; /* Further increased default, will be adjusted by JavaScript */
         transition: max-height 0.3s ease;
         overflow-y: auto; /* Allow scrolling if needed */
+        padding-bottom: 20px; /* Extra padding at bottom */
     }
 }
 
