@@ -408,35 +408,16 @@ async function calculateRank(score, scope, weekKey = null) {
         
         if (scope === 'weekly' && weekKey) {
             query = `
-                WITH ranked AS (
-                    SELECT player_name, score, created_at,
-                           ROW_NUMBER() OVER (
-                               PARTITION BY player_name
-                               ORDER BY score DESC, created_at ASC
-                           ) as rn
-                    FROM scores
-                    WHERE weekly_key = $1
-                )
                 SELECT COUNT(*) as rank
-                FROM ranked
-                WHERE rn = 1 AND (score > $2 OR (score = $2 AND created_at < (SELECT MIN(created_at) FROM ranked WHERE rn = 1 AND score = $2)))
+                FROM scores
+                WHERE weekly_key = $1 AND (score > $2 OR (score = $2 AND created_at < (SELECT MIN(created_at) FROM scores WHERE weekly_key = $1 AND score = $2)))
             `;
             params = [weekKey, score];
         } else {
             query = `
-                WITH best AS (
-                    SELECT player_name, MAX(score) as best_score
-                    FROM scores
-                    GROUP BY player_name
-                ),
-                best_rows AS (
-                    SELECT s.player_name, s.score, s.created_at
-                    FROM scores s
-                    JOIN best b ON b.player_name = s.player_name AND b.best_score = s.score
-                )
                 SELECT COUNT(*) as rank
-                FROM best_rows
-                WHERE (score > $1 OR (score = $1 AND created_at < (SELECT MIN(created_at) FROM best_rows WHERE score = $1)))
+                FROM scores
+                WHERE (score > $1 OR (score = $1 AND created_at < (SELECT MIN(created_at) FROM scores WHERE score = $1)))
             `;
             params = [score];
         }
@@ -453,19 +434,10 @@ async function calculateRank(score, scope, weekKey = null) {
 async function getWeeklyLeaderboard(weekKey, limit) {
     try {
         const query = `
-            WITH ranked AS (
-                SELECT player_name, score, created_at,
-                       ROW_NUMBER() OVER (
-                           PARTITION BY player_name
-                           ORDER BY score DESC, created_at ASC
-                       ) as rn
-                FROM scores
-                WHERE weekly_key = $1
-            )
             SELECT ROW_NUMBER() OVER (ORDER BY score DESC, created_at ASC) as rank,
                    player_name, score, created_at
-            FROM ranked
-            WHERE rn = 1
+            FROM scores
+            WHERE weekly_key = $1
             ORDER BY score DESC, created_at ASC
             LIMIT $2
         `;
@@ -486,19 +458,9 @@ async function getWeeklyLeaderboard(weekKey, limit) {
 async function getAllTimeLeaderboard(limit) {
     try {
         const query = `
-            WITH best AS (
-                SELECT player_name, MAX(score) as best_score
-                FROM scores
-                GROUP BY player_name
-            ),
-            best_rows AS (
-                SELECT s.player_name, s.score, s.created_at
-                FROM scores s
-                JOIN best b ON b.player_name = s.player_name AND b.best_score = s.score
-            )
             SELECT ROW_NUMBER() OVER (ORDER BY score DESC, created_at ASC) as rank,
                    player_name, score, created_at
-            FROM best_rows
+            FROM scores
             ORDER BY score DESC, created_at ASC
             LIMIT $1
         `;
