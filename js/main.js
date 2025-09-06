@@ -153,6 +153,11 @@ class LabPanicApp {
 
         // Load leaderboard data
         this.loadLeaderboard(tabName);
+        
+        // Adjust height after tab switch
+        setTimeout(() => {
+            this.adjustMainMenuHeight();
+        }, 100);
     }
 
     async loadLeaderboards() {
@@ -190,12 +195,76 @@ class LabPanicApp {
                 <span class="score">${entry.score.toLocaleString()}</span>
             </div>
         `).join('');
+        
+        // Adjust container height based on number of entries (desktop only)
+        this.adjustLeaderboardHeight(container, entries.length);
     }
 
     escapeHtml(text) {
         const div = document.createElement('div');
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    adjustLeaderboardHeight(container, entryCount) {
+        // Only adjust on desktop
+        if (window.innerWidth <= 768) return;
+        
+        const leaderboardContainer = container.closest('.leaderboard-container');
+        if (!leaderboardContainer) return;
+        
+        // Calculate height based on entries
+        // Each entry is approximately 50px + padding
+        const entryHeight = 50;
+        const padding = 40; // Top and bottom padding
+        const headerHeight = 60; // Title height
+        const calculatedHeight = Math.min(entryCount * entryHeight + padding + headerHeight, 600);
+        
+        // Set the height
+        leaderboardContainer.style.maxHeight = `${calculatedHeight}px`;
+        
+        // Also adjust the list height
+        const listElement = container;
+        const listHeight = Math.min(entryCount * entryHeight, 500);
+        listElement.style.maxHeight = `${listHeight}px`;
+        
+        // Adjust main menu height if we're on the main menu
+        const mainMenu = document.getElementById('mainMenu');
+        if (mainMenu && mainMenu.classList.contains('active')) {
+            this.adjustMainMenuHeight();
+        }
+    }
+
+    adjustMainMenuHeight() {
+        // Only adjust on desktop
+        if (window.innerWidth <= 768) return;
+        
+        const mainMenu = document.getElementById('mainMenu');
+        if (!mainMenu) return;
+        
+        // Calculate total content height
+        const titleContainer = mainMenu.querySelector('.title-container');
+        const leaderboardTabs = mainMenu.querySelector('.leaderboard-tabs');
+        const leaderboardContainer = mainMenu.querySelector('.leaderboard-container');
+        const buttons = mainMenu.querySelectorAll('.btn');
+        
+        let totalHeight = 0;
+        
+        if (titleContainer) totalHeight += titleContainer.offsetHeight + 40;
+        if (leaderboardTabs) totalHeight += leaderboardTabs.offsetHeight + 20;
+        if (leaderboardContainer) totalHeight += leaderboardContainer.offsetHeight + 20;
+        if (buttons.length > 0) totalHeight += Array.from(buttons).reduce((sum, btn) => sum + btn.offsetHeight, 0) + 40;
+        
+        // Add some extra padding
+        totalHeight += 60;
+        
+        // Set minimum height of 600px, maximum of 90vh
+        const minHeight = 600;
+        const maxHeight = window.innerHeight * 0.9;
+        const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
+        
+        mainMenu.style.height = `${finalHeight}px`;
+        mainMenu.style.minHeight = `${finalHeight}px`;
     }
 
     showGameOver(score) {

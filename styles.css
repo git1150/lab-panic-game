@@ -78,13 +78,14 @@ body {
         position: absolute;
     }
     
-    /* Main menu screen - allow scrolling */
+    /* Main menu screen - dynamic height */
     .screen#mainMenu {
-        height: auto;
+        height: 600px; /* Default height, will be adjusted by JavaScript */
         min-height: 600px;
         max-height: 90vh;
         overflow-y: auto;
         padding: 20px 0;
+        transition: height 0.3s ease;
     }
 }
 
@@ -222,15 +223,17 @@ body {
     }
 }
 
-/* Desktop leaderboard - allow more height */
+/* Desktop leaderboard - dynamic height */
 @media (min-width: 769px) {
     .leaderboard-container {
-        max-height: 500px;
+        max-height: 500px; /* Default, will be adjusted by JavaScript */
         margin: 1rem 0;
+        transition: max-height 0.3s ease;
     }
     
     .leaderboard-list {
-        max-height: 400px;
+        max-height: 400px; /* Default, will be adjusted by JavaScript */
+        transition: max-height 0.3s ease;
     }
 }
 
