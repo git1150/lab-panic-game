@@ -1,7 +1,7 @@
 // API module voor Lab Panic Leaderboard
 class LabPanicAPI {
     constructor() {
-        this.baseUrl = 'http://localhost:8787'; // Development server
+        this.baseUrl = 'https://labpanic.com'; // Production server
         this.sessionId = null;
         this.startToken = null;
         this.platform = this.detectPlatform();
