@@ -80,7 +80,7 @@ body {
     }
     
     /* Main menu screen - dynamic height */
-    .screen#mainMenu {
+    .screen#startScreen {
         height: 600px; /* Default height, will be adjusted by JavaScript */
         min-height: 600px;
         max-height: 90vh;
@@ -574,24 +574,24 @@ body {
 
 /* Scrollbar styling */
 .leaderboard-list::-webkit-scrollbar,
-.screen#mainMenu::-webkit-scrollbar {
+.screen#startScreen::-webkit-scrollbar {
     width: 8px;
 }
 
 .leaderboard-list::-webkit-scrollbar-track,
-.screen#mainMenu::-webkit-scrollbar-track {
+.screen#startScreen::-webkit-scrollbar-track {
     background: rgba(255, 255, 255, 0.1);
     border-radius: 4px;
 }
 
 .leaderboard-list::-webkit-scrollbar-thumb,
-.screen#mainMenu::-webkit-scrollbar-thumb {
+.screen#startScreen::-webkit-scrollbar-thumb {
     background: #00ff88;
     border-radius: 4px;
 }
 
 .leaderboard-list::-webkit-scrollbar-thumb:hover,
-.screen#mainMenu::-webkit-scrollbar-thumb:hover {
+.screen#startScreen::-webkit-scrollbar-thumb:hover {
     background: #00cc6a;
 }
 

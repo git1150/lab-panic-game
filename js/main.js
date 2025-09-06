@@ -234,7 +234,7 @@ class LabPanicApp {
         listElement.style.maxHeight = `${listHeight}px`;
         
         // Adjust main menu height if we're on the main menu
-        const mainMenu = document.getElementById('mainMenu');
+        const mainMenu = document.getElementById('startScreen');
         if (mainMenu && mainMenu.classList.contains('active')) {
             this.adjustMainMenuHeight();
         }
@@ -244,7 +244,7 @@ class LabPanicApp {
         // Only adjust on desktop
         if (window.innerWidth <= 768) return;
         
-        const mainMenu = document.getElementById('mainMenu');
+        const mainMenu = document.getElementById('startScreen');
         const gameContainer = document.getElementById('gameContainer');
         if (!mainMenu || !gameContainer) return;
         
@@ -268,6 +268,15 @@ class LabPanicApp {
         const minHeight = 600;
         const maxHeight = window.innerHeight * 0.9;
         const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
+        
+        console.log('Height calculation:', {
+            titleContainer: titleContainer?.offsetHeight,
+            leaderboardTabs: leaderboardTabs?.offsetHeight,
+            leaderboardContainer: leaderboardContainer?.offsetHeight,
+            buttons: Array.from(buttons).reduce((sum, btn) => sum + btn.offsetHeight, 0),
+            totalHeight,
+            finalHeight
+        });
         
         // Update both main menu and game container
         mainMenu.style.height = `${finalHeight}px`;
