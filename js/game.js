@@ -563,19 +563,19 @@ class Bottle {
         // Draw Erlenmeyer flask (conical shape)
         ctx.fillStyle = this.color;
         
-        // Main conical body of the flask (straight sides like real Erlenmeyer)
+        // Main conical body of the flask (professional Erlenmeyer design)
         ctx.beginPath();
-        ctx.moveTo(-20, 20); // Bottom left (wide)
-        ctx.lineTo(-12, -15); // Top left (narrow) - straight line
-        ctx.lineTo(12, -15); // Top right (narrow) - straight line
-        ctx.lineTo(20, 20); // Bottom right (wide)
+        ctx.moveTo(-18, 18); // Bottom left (wide)
+        ctx.lineTo(-10, -12); // Top left (narrow) - straight line
+        ctx.lineTo(10, -12); // Top right (narrow) - straight line
+        ctx.lineTo(18, 18); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         
-        // Add rounded bottom corners
+        // Add subtle rounded bottom corners
         ctx.beginPath();
-        ctx.arc(-20, 20, 3, 0, Math.PI / 2); // Bottom left corner
-        ctx.arc(20, 20, 3, Math.PI / 2, Math.PI); // Bottom right corner
+        ctx.arc(-18, 18, 2, 0, Math.PI / 2); // Bottom left corner
+        ctx.arc(18, 18, 2, Math.PI / 2, Math.PI); // Bottom right corner
         ctx.fill();
         
         // Draw glass outline
@@ -583,46 +583,58 @@ class Bottle {
         ctx.lineWidth = 2;
         ctx.stroke();
         
-        // Draw neck of the flask (straight tube section)
+        // Draw neck of the flask (professional cylindrical neck)
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.moveTo(-8, -15);
-        ctx.lineTo(-8, -25); // Extended straight section
-        ctx.lineTo(8, -25);
-        ctx.lineTo(8, -15);
+        ctx.moveTo(-6, -12);
+        ctx.lineTo(-6, -20); // Straight cylindrical section
+        ctx.lineTo(6, -20);
+        ctx.lineTo(6, -12);
         ctx.closePath();
         ctx.fill();
         
-        // Draw top opening of the tube
+        // Draw neck outline
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+        
+        // Draw top opening with slight flare
         ctx.fillStyle = this.color;
         ctx.beginPath();
-        ctx.moveTo(-6, -25);
-        ctx.lineTo(-6, -30);
-        ctx.lineTo(6, -30);
-        ctx.lineTo(6, -25);
+        ctx.moveTo(-5, -20);
+        ctx.lineTo(-7, -25); // Slight flare outward
+        ctx.lineTo(7, -25);
+        ctx.lineTo(5, -20);
         ctx.closePath();
         ctx.fill();
         
-        // Draw stopper/cap
-        ctx.fillStyle = '#8B4513';
+        // Draw glass rim
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
         ctx.beginPath();
-        ctx.moveTo(-6, -30);
-        ctx.lineTo(-8, -35);
-        ctx.lineTo(8, -35);
-        ctx.lineTo(6, -30);
-        ctx.closePath();
-        ctx.fill();
+        ctx.moveTo(-7, -25);
+        ctx.lineTo(7, -25);
+        ctx.stroke();
         
         // Draw liquid inside the flask (60% fill level from bottom)
         ctx.fillStyle = this.color;
-        ctx.globalAlpha = 0.8;
+        ctx.globalAlpha = 0.7;
         ctx.beginPath();
-        ctx.moveTo(-18, 2); // Liquid level at 60% from bottom (wide at bottom)
-        ctx.lineTo(-10, -9); // Top left (narrow) - straight line
-        ctx.lineTo(10, -9); // Top right (narrow) - straight line
-        ctx.lineTo(18, 2); // Bottom right (wide)
+        ctx.moveTo(-16, 0); // Liquid level at 60% from bottom (wide at bottom)
+        ctx.lineTo(-8, -7); // Top left (narrow) - straight line
+        ctx.lineTo(8, -7); // Top right (narrow) - straight line
+        ctx.lineTo(16, 0); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
+        
+        // Draw liquid surface (meniscus effect)
+        ctx.strokeStyle = this.color;
+        ctx.globalAlpha = 0.9;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(-16, 0);
+        ctx.lineTo(16, 0);
+        ctx.stroke();
         ctx.globalAlpha = 1;
         
         // Draw type indicator
@@ -700,19 +712,19 @@ class BrokenBottle {
         // Draw broken Erlenmeyer flask pieces
         ctx.fillStyle = '#ff6b6b';
         
-        // Main broken conical piece (straight sides like real Erlenmeyer)
+        // Main broken conical piece (professional Erlenmeyer design)
         ctx.beginPath();
-        ctx.moveTo(-12, 12); // Bottom left (wide)
-        ctx.lineTo(-8, -8); // Top left (narrow) - straight line
-        ctx.lineTo(8, -8); // Top right (narrow) - straight line
-        ctx.lineTo(12, 12); // Bottom right (wide)
+        ctx.moveTo(-10, 10); // Bottom left (wide)
+        ctx.lineTo(-6, -6); // Top left (narrow) - straight line
+        ctx.lineTo(6, -6); // Top right (narrow) - straight line
+        ctx.lineTo(10, 10); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         
-        // Add rounded bottom corners for broken pieces
+        // Add subtle rounded bottom corners for broken pieces
         ctx.beginPath();
-        ctx.arc(-12, 12, 2, 0, Math.PI / 2); // Bottom left corner
-        ctx.arc(12, 12, 2, Math.PI / 2, Math.PI); // Bottom right corner
+        ctx.arc(-10, 10, 1.5, 0, Math.PI / 2); // Bottom left corner
+        ctx.arc(10, 10, 1.5, Math.PI / 2, Math.PI); // Bottom right corner
         ctx.fill();
         
         // Broken pieces scattered around (conical shapes)
