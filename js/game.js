@@ -563,12 +563,13 @@ class Bottle {
         // Draw Erlenmeyer flask (conical shape)
         ctx.fillStyle = this.color;
         
-        // Main conical body of the flask (wide at bottom, narrow at top)
+        // Main conical body of the flask (more curved like real Erlenmeyer)
         ctx.beginPath();
         ctx.moveTo(-20, 20); // Bottom left (wide)
-        ctx.lineTo(-12, -15); // Top left (narrow)
-        ctx.lineTo(12, -15); // Top right (narrow)
-        ctx.lineTo(20, 20); // Bottom right (wide)
+        ctx.quadraticCurveTo(-25, 0, -15, -10); // Left curve
+        ctx.lineTo(-10, -15); // Top left (narrow)
+        ctx.lineTo(10, -15); // Top right (narrow)
+        ctx.quadraticCurveTo(25, 0, 20, 20); // Right curve
         ctx.closePath();
         ctx.fill();
         
@@ -613,14 +614,15 @@ class Bottle {
         ctx.closePath();
         ctx.fill();
         
-        // Draw liquid inside the flask
+        // Draw liquid inside the flask (70% fill level)
         ctx.fillStyle = this.color;
-        ctx.globalAlpha = 0.7;
+        ctx.globalAlpha = 0.8;
         ctx.beginPath();
-        ctx.moveTo(-18, 15); // Liquid level (wide at bottom)
-        ctx.lineTo(-10, -10); // Top left (narrow)
-        ctx.lineTo(10, -10); // Top right (narrow)
-        ctx.lineTo(18, 15); // Bottom right (wide)
+        ctx.moveTo(-18, 8); // Liquid level at 70% (wide at bottom)
+        ctx.quadraticCurveTo(-22, -2, -12, -8); // Left curve for liquid
+        ctx.lineTo(-8, -10); // Top left (narrow)
+        ctx.lineTo(8, -10); // Top right (narrow)
+        ctx.quadraticCurveTo(22, -2, 18, 8); // Right curve for liquid
         ctx.closePath();
         ctx.fill();
         ctx.globalAlpha = 1;
@@ -700,12 +702,13 @@ class BrokenBottle {
         // Draw broken Erlenmeyer flask pieces
         ctx.fillStyle = '#ff6b6b';
         
-        // Main broken conical piece (wide at bottom, narrow at top)
+        // Main broken conical piece (curved like real Erlenmeyer)
         ctx.beginPath();
         ctx.moveTo(-12, 12); // Bottom left (wide)
-        ctx.lineTo(-8, -8); // Top left (narrow)
-        ctx.lineTo(8, -8); // Top right (narrow)
-        ctx.lineTo(12, 12); // Bottom right (wide)
+        ctx.quadraticCurveTo(-15, 2, -10, -5); // Left curve
+        ctx.lineTo(-6, -8); // Top left (narrow)
+        ctx.lineTo(6, -8); // Top right (narrow)
+        ctx.quadraticCurveTo(15, 2, 12, 12); // Right curve
         ctx.closePath();
         ctx.fill();
         

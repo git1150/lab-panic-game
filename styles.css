@@ -475,7 +475,7 @@ body {
     height: 60px;
     position: relative;
     flex-shrink: 0;
-    clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
+    clip-path: polygon(0% 0%, 100% 0%, 75% 100%, 25% 100%);
     border-radius: 0 0 8px 8px; /* Rounded bottom corners */
 }
 
@@ -513,6 +513,17 @@ body {
     height: 6px;
     background: #8B4513;
     border-radius: 3px;
+}
+
+/* Liquid level indicator (70% fill) */
+.bottle-demo .liquid-level {
+    position: absolute;
+    bottom: 18px; /* 70% from bottom */
+    left: 10px;
+    right: 10px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 1px;
 }
 
 .bottle-info {
