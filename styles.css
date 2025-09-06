@@ -228,14 +228,16 @@ body {
 @media (min-width: 769px) {
     .leaderboard-container {
         max-height: 500px; /* Default, will be adjusted by JavaScript */
-        height: auto; /* Allow dynamic height */
+        height: 400px; /* Default height */
         margin: 1rem 0;
         transition: max-height 0.3s ease, height 0.3s ease;
+        overflow: hidden; /* Prevent content overflow */
     }
     
     .leaderboard-list {
         max-height: 400px; /* Default, will be adjusted by JavaScript */
         transition: max-height 0.3s ease;
+        overflow-y: auto; /* Allow scrolling if needed */
     }
 }
 

@@ -243,35 +243,34 @@ class LabPanicApp {
         const leaderboardContainer = container.closest('.leaderboard-container');
         if (!leaderboardContainer) return;
         
-        // Wait a bit for DOM to update, then calculate actual heights
-        setTimeout(() => {
-            // Calculate height based on actual content
-            const titleHeight = 60; // Approximate title height
-            const entryHeight = 50; // Approximate entry height
-            const padding = 40; // Container padding
-            
-            // Calculate total needed height
-            const totalNeededHeight = titleHeight + (entryCount * entryHeight) + padding;
-            
-            // Set reasonable limits
-            const minHeight = 200;
-            const maxHeight = 600;
-            const finalHeight = Math.max(minHeight, Math.min(totalNeededHeight, maxHeight));
-            
-            // Apply the height
-            leaderboardContainer.style.maxHeight = `${finalHeight}px`;
-            leaderboardContainer.style.height = `${finalHeight}px`;
-            
-            // Also adjust the list height
-            const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 500));
-            container.style.maxHeight = `${listHeight}px`;
-            
-            // Now adjust the main menu height
-            this.adjustMainMenuHeight();
-        }, 50);
+        // Simple calculation: each entry needs about 50px
+        const entryHeight = 50;
+        const titleHeight = 60;
+        const padding = 40;
+        
+        // Calculate needed height
+        const neededHeight = titleHeight + (entryCount * entryHeight) + padding;
+        
+        // Set limits
+        const minHeight = 200;
+        const maxHeight = 600;
+        const finalHeight = Math.max(minHeight, Math.min(neededHeight, maxHeight));
+        
+        console.log(`Adjusting leaderboard: ${entryCount} entries, height: ${finalHeight}px`);
+        
+        // Force the height
+        leaderboardContainer.style.maxHeight = `${finalHeight}px`;
+        leaderboardContainer.style.height = `${finalHeight}px`;
+        
+        // Adjust list height too
+        const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 500));
+        container.style.maxHeight = `${listHeight}px`;
+        
+        // Force main menu adjustment
+        this.forceMainMenuResize();
     }
 
-    adjustMainMenuHeight() {
+    forceMainMenuResize() {
         // Only adjust on desktop
         if (window.innerWidth <= 768) return;
         
@@ -279,43 +278,34 @@ class LabPanicApp {
         const gameContainer = document.getElementById('gameContainer');
         if (!mainMenu || !gameContainer) return;
         
-        // Wait a bit for DOM to update
-        setTimeout(() => {
-            // Calculate total content height
-            const titleContainer = mainMenu.querySelector('.title-container');
-            const leaderboardTabs = mainMenu.querySelector('.leaderboard-tabs');
-            const leaderboardContainer = mainMenu.querySelector('.leaderboard-container');
-            const buttons = mainMenu.querySelectorAll('.btn');
-            
-            let totalHeight = 0;
-            
-            if (titleContainer) totalHeight += titleContainer.offsetHeight + 40;
-            if (leaderboardTabs) totalHeight += leaderboardTabs.offsetHeight + 20;
-            if (leaderboardContainer) totalHeight += leaderboardContainer.offsetHeight + 20;
-            if (buttons.length > 0) totalHeight += Array.from(buttons).reduce((sum, btn) => sum + btn.offsetHeight, 0) + 40;
-            
-            // Add some extra padding
-            totalHeight += 60;
-            
-            // Set minimum height of 600px, maximum of 90vh
-            const minHeight = 600;
-            const maxHeight = window.innerHeight * 0.9;
-            const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
-            
-            console.log('Adjusting main menu height:', {
-                titleContainer: titleContainer?.offsetHeight,
-                leaderboardTabs: leaderboardTabs?.offsetHeight,
-                leaderboardContainer: leaderboardContainer?.offsetHeight,
-                buttons: Array.from(buttons).reduce((sum, btn) => sum + btn.offsetHeight, 0),
-                totalHeight,
-                finalHeight
-            });
-            
-            // Update both main menu and game container
-            mainMenu.style.height = `${finalHeight}px`;
-            mainMenu.style.minHeight = `${finalHeight}px`;
-            gameContainer.style.height = `${finalHeight}px`;
-        }, 100);
+        // Get the leaderboard container height
+        const leaderboardContainer = mainMenu.querySelector('.leaderboard-container');
+        const leaderboardHeight = leaderboardContainer ? leaderboardContainer.offsetHeight : 400;
+        
+        // Calculate total height based on fixed components + dynamic leaderboard
+        const titleHeight = 200; // Approximate title height
+        const tabsHeight = 60;   // Approximate tabs height
+        const buttonsHeight = 120; // Approximate buttons height
+        const padding = 80;      // Total padding
+        
+        const totalHeight = titleHeight + tabsHeight + leaderboardHeight + buttonsHeight + padding;
+        
+        // Set limits
+        const minHeight = 600;
+        const maxHeight = window.innerHeight * 0.9;
+        const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
+        
+        console.log(`Resizing main menu: leaderboard=${leaderboardHeight}px, total=${totalHeight}px, final=${finalHeight}px`);
+        
+        // Force the height
+        mainMenu.style.height = `${finalHeight}px`;
+        mainMenu.style.minHeight = `${finalHeight}px`;
+        gameContainer.style.height = `${finalHeight}px`;
+    }
+
+    adjustMainMenuHeight() {
+        // Alias for the new function
+        this.forceMainMenuResize();
     }
 
     showGameOver(score) {
