@@ -42,6 +42,7 @@ body {
         border-radius: 15px;
         box-shadow: 0 0 30px rgba(0, 255, 136, 0.3);
         transition: height 0.3s ease;
+        position: relative; /* Ensure proper positioning */
     }
 }
 
@@ -233,15 +234,15 @@ body {
 /* Desktop leaderboard - dynamic height */
 @media (min-width: 769px) {
     .leaderboard-container {
-        max-height: 500px; /* Default, will be adjusted by JavaScript */
-        height: 400px; /* Default height */
+        max-height: 600px; /* Increased default, will be adjusted by JavaScript */
+        height: 500px; /* Increased default height */
         margin: 1rem 0;
         transition: max-height 0.3s ease, height 0.3s ease;
         overflow: hidden; /* Prevent content overflow */
     }
     
     .leaderboard-list {
-        max-height: 400px; /* Default, will be adjusted by JavaScript */
+        max-height: 500px; /* Increased default, will be adjusted by JavaScript */
         transition: max-height 0.3s ease;
         overflow-y: auto; /* Allow scrolling if needed */
     }

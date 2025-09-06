@@ -275,7 +275,7 @@ class LabPanicApp {
         leaderboardContainer.style.height = `${finalHeight}px`;
         
         // Adjust list height too
-        const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 500));
+        const listHeight = Math.max(100, Math.min(entryCount * entryHeight, 600));
         container.style.maxHeight = `${listHeight}px`;
         
         // Force main menu adjustment
@@ -313,6 +313,10 @@ class LabPanicApp {
         mainMenu.style.height = `${finalHeight}px`;
         mainMenu.style.minHeight = `${finalHeight}px`;
         gameContainer.style.height = `${finalHeight}px`;
+        
+        // Ensure the border scales with the container
+        gameContainer.style.border = '2px solid #00ff88';
+        gameContainer.style.borderRadius = '15px';
     }
 
     adjustMainMenuHeight() {
