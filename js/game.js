@@ -133,6 +133,10 @@ class LabPanicGame {
         this.spawnRate = 1200; // Sneller starten
         this.maxBottles = 4; // Meer bottles direct
         
+        // Reset UI immediately
+        this.updateUI();
+        this.updatePowerupUI();
+        
         // Start session
         this.api.startSession().then(response => {
             console.log('Game session started:', response);
@@ -156,7 +160,8 @@ class LabPanicGame {
         this.update(deltaTime);
         this.render();
         
-        requestAnimationFrame(() => this.gameLoop());
+        // Use setTimeout instead of requestAnimationFrame to prevent freezing when window loses focus
+        setTimeout(() => this.gameLoop(), 16); // ~60 FPS
     }
 
     update(deltaTime) {
@@ -491,6 +496,7 @@ class LabPanicGame {
     resume() {
         this.gameState = 'playing';
         this.audio.bgMusic.play().catch(e => console.log('Audio resume failed:', e));
+        this.lastTime = Date.now(); // Reset time to prevent large deltaTime jumps
         this.gameLoop();
     }
 }

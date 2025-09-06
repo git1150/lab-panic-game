@@ -120,7 +120,32 @@ class LabPanicApp {
     startGame() {
         this.switchScreen('game');
         if (this.game) {
+            // Ensure UI is properly reset before starting
+            this.resetGameUI();
             this.game.startGame();
+        }
+    }
+
+    resetGameUI() {
+        // Reset hearts display
+        const hearts = ['heart1', 'heart2', 'heart3'];
+        hearts.forEach(heartId => {
+            const heart = document.getElementById(heartId);
+            if (heart) {
+                heart.classList.remove('lost');
+            }
+        });
+        
+        // Reset score display
+        const scoreText = document.getElementById('scoreText');
+        if (scoreText) {
+            scoreText.textContent = 'Score: 0';
+        }
+        
+        // Reset powerup indicator
+        const indicator = document.getElementById('powerupIndicator');
+        if (indicator) {
+            indicator.classList.remove('active');
         }
     }
 
@@ -269,14 +294,6 @@ class LabPanicApp {
         const maxHeight = window.innerHeight * 0.9;
         const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
         
-        console.log('Height calculation:', {
-            titleContainer: titleContainer?.offsetHeight,
-            leaderboardTabs: leaderboardTabs?.offsetHeight,
-            leaderboardContainer: leaderboardContainer?.offsetHeight,
-            buttons: Array.from(buttons).reduce((sum, btn) => sum + btn.offsetHeight, 0),
-            totalHeight,
-            finalHeight
-        });
         
         // Update both main menu and game container
         mainMenu.style.height = `${finalHeight}px`;
@@ -432,6 +449,8 @@ class LabPanicApp {
     playAgain() {
         this.switchScreen('game');
         if (this.game) {
+            // Ensure UI is properly reset before starting
+            this.resetGameUI();
             this.game.startGame();
         }
     }
