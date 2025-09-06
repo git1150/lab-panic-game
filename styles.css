@@ -515,10 +515,10 @@ body {
     border-radius: 3px;
 }
 
-/* Liquid level indicator (70% fill) */
+/* Liquid level indicator (60% fill) */
 .bottle-demo .liquid-level {
     position: absolute;
-    bottom: 18px; /* 70% from bottom */
+    bottom: 24px; /* 60% from bottom */
     left: 10px;
     right: 10px;
     height: 2px;

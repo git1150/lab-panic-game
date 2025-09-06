@@ -563,13 +563,12 @@ class Bottle {
         // Draw Erlenmeyer flask (conical shape)
         ctx.fillStyle = this.color;
         
-        // Main conical body of the flask (more curved like real Erlenmeyer)
+        // Main conical body of the flask (straight sides like real Erlenmeyer)
         ctx.beginPath();
         ctx.moveTo(-20, 20); // Bottom left (wide)
-        ctx.quadraticCurveTo(-25, 0, -15, -10); // Left curve
-        ctx.lineTo(-10, -15); // Top left (narrow)
-        ctx.lineTo(10, -15); // Top right (narrow)
-        ctx.quadraticCurveTo(25, 0, 20, 20); // Right curve
+        ctx.lineTo(-12, -15); // Top left (narrow) - straight line
+        ctx.lineTo(12, -15); // Top right (narrow) - straight line
+        ctx.lineTo(20, 20); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         
@@ -614,15 +613,14 @@ class Bottle {
         ctx.closePath();
         ctx.fill();
         
-        // Draw liquid inside the flask (70% fill level)
+        // Draw liquid inside the flask (60% fill level from bottom)
         ctx.fillStyle = this.color;
         ctx.globalAlpha = 0.8;
         ctx.beginPath();
-        ctx.moveTo(-18, 8); // Liquid level at 70% (wide at bottom)
-        ctx.quadraticCurveTo(-22, -2, -12, -8); // Left curve for liquid
-        ctx.lineTo(-8, -10); // Top left (narrow)
-        ctx.lineTo(8, -10); // Top right (narrow)
-        ctx.quadraticCurveTo(22, -2, 18, 8); // Right curve for liquid
+        ctx.moveTo(-18, 2); // Liquid level at 60% from bottom (wide at bottom)
+        ctx.lineTo(-10, -9); // Top left (narrow) - straight line
+        ctx.lineTo(10, -9); // Top right (narrow) - straight line
+        ctx.lineTo(18, 2); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         ctx.globalAlpha = 1;
@@ -702,13 +700,12 @@ class BrokenBottle {
         // Draw broken Erlenmeyer flask pieces
         ctx.fillStyle = '#ff6b6b';
         
-        // Main broken conical piece (curved like real Erlenmeyer)
+        // Main broken conical piece (straight sides like real Erlenmeyer)
         ctx.beginPath();
         ctx.moveTo(-12, 12); // Bottom left (wide)
-        ctx.quadraticCurveTo(-15, 2, -10, -5); // Left curve
-        ctx.lineTo(-6, -8); // Top left (narrow)
-        ctx.lineTo(6, -8); // Top right (narrow)
-        ctx.quadraticCurveTo(15, 2, 12, 12); // Right curve
+        ctx.lineTo(-8, -8); // Top left (narrow) - straight line
+        ctx.lineTo(8, -8); // Top right (narrow) - straight line
+        ctx.lineTo(12, 12); // Bottom right (wide)
         ctx.closePath();
         ctx.fill();
         
