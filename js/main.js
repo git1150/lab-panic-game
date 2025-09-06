@@ -290,8 +290,8 @@ class LabPanicApp {
             }
             
             alert(errorMessage);
-            
-            // Re-enable submit button
+        } finally {
+            // Always reset submit button
             submitButton.disabled = false;
             submitButton.textContent = 'Save Score';
         }
