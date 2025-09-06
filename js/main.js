@@ -265,14 +265,65 @@ class LabPanicApp {
     }
 
     adjustLeaderboardHeight(container, entryCount) {
-        // Simplified approach - let CSS handle the sizing
-        // Just ensure scroll position is reset
-        this.resetScrollPosition();
+        // Only adjust on desktop
+        if (window.innerWidth <= 768) return;
+        
+        const leaderboardContainer = container.closest('.leaderboard-container');
+        if (!leaderboardContainer) return;
+        
+        // Calculate height based on entries
+        const entryHeight = 50;
+        const titleHeight = 60;
+        const padding = 40;
+        
+        const neededHeight = titleHeight + (entryCount * entryHeight) + padding;
+        const minHeight = 200;
+        const maxHeight = 400;
+        const finalHeight = Math.max(minHeight, Math.min(neededHeight, maxHeight));
+        
+        // Set the height
+        leaderboardContainer.style.maxHeight = `${finalHeight}px`;
+        leaderboardContainer.style.height = `${finalHeight}px`;
+        
+        // Adjust list height
+        const listHeight = Math.max(150, Math.min(entryCount * entryHeight, 350));
+        container.style.maxHeight = `${listHeight}px`;
+        
+        // Force main menu adjustment
+        this.forceMainMenuResize();
     }
 
     forceMainMenuResize() {
-        // Simplified approach - let CSS handle the sizing
-        // Only reset scroll position
+        // Only adjust on desktop
+        if (window.innerWidth <= 768) return;
+        
+        const mainMenu = document.getElementById('startScreen');
+        const gameContainer = document.getElementById('gameContainer');
+        if (!mainMenu || !gameContainer) return;
+        
+        // Get the leaderboard container height
+        const leaderboardContainer = mainMenu.querySelector('.leaderboard-container');
+        const leaderboardHeight = leaderboardContainer ? leaderboardContainer.offsetHeight : 350;
+        
+        // Calculate total height needed
+        const titleHeight = 80;
+        const tabsHeight = 60;
+        const buttonsHeight = 120;
+        const padding = 80;
+        
+        const totalHeight = titleHeight + tabsHeight + leaderboardHeight + buttonsHeight + padding;
+        
+        // Set limits
+        const minHeight = 600;
+        const maxHeight = window.innerHeight * 0.9;
+        const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
+        
+        // Force the height
+        mainMenu.style.height = `${finalHeight}px`;
+        mainMenu.style.minHeight = `${finalHeight}px`;
+        gameContainer.style.height = `${finalHeight}px`;
+        
+        // Reset scroll position
         this.resetScrollPosition();
     }
 
