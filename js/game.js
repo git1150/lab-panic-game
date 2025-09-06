@@ -16,6 +16,7 @@ class LabPanicGame {
         this.bottles = [];
         this.particles = [];
         this.powerups = [];
+        this.brokenBottles = []; // Gebroken flesjes op de grond
         
         // Power-up system
         this.activePowerup = null;
@@ -127,6 +128,7 @@ class LabPanicGame {
         this.bottles = [];
         this.particles = [];
         this.powerups = [];
+        this.brokenBottles = []; // Reset gebroken flesjes
         this.activePowerup = null;
         this.powerupTimer = 0;
         this.spawnTimer = 0;
@@ -183,6 +185,7 @@ class LabPanicGame {
         this.updateBottles(deltaTime);
         this.updateParticles(deltaTime);
         this.updatePowerups(deltaTime);
+        this.updateBrokenBottles(deltaTime);
         
         // Update power-up timer
         if (this.activePowerup) {
@@ -358,12 +361,25 @@ class LabPanicGame {
         }
     }
 
+    createBrokenBottle(x, y) {
+        const brokenBottle = new BrokenBottle(x, y);
+        this.brokenBottles.push(brokenBottle);
+    }
+
+    updateBrokenBottles(deltaTime) {
+        this.brokenBottles.forEach(brokenBottle => {
+            brokenBottle.update(deltaTime);
+        });
+    }
+
     cleanupObjects() {
         // Remove bottles that hit the ground
         this.bottles = this.bottles.filter(bottle => {
             if (bottle.y > this.canvas.height + 50) {
                 if (bottle.type === 'dangerous') {
                     this.loseLife();
+                    // Create broken bottle on the ground
+                    this.createBrokenBottle(bottle.x, this.canvas.height - 30);
                 }
                 return false;
             }
@@ -461,6 +477,7 @@ class LabPanicGame {
         this.bottles.forEach(bottle => bottle.draw(this.ctx));
         this.particles.forEach(particle => particle.draw(this.ctx));
         this.powerups.forEach(powerup => powerup.draw(this.ctx));
+        this.brokenBottles.forEach(brokenBottle => brokenBottle.draw(this.ctx));
         
         // Reset filter
         this.ctx.filter = 'none';
@@ -590,6 +607,55 @@ class Particle {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.restore();
+    }
+}
+
+// BrokenBottle class voor gebroken flesjes op de grond
+class BrokenBottle {
+    constructor(x, y) {
+        this.x = x;
+        this.y = y;
+        this.rotation = Math.random() * Math.PI * 2;
+        this.scale = 0.8 + Math.random() * 0.4; // Variatie in grootte
+        this.alpha = 0.8; // Iets transparant
+        this.time = 0;
+    }
+
+    update(deltaTime) {
+        this.time += deltaTime;
+        // Langzaam vervagen over tijd
+        this.alpha = Math.max(0.3, 0.8 - (this.time / 30000)); // 30 seconden
+    }
+
+    draw(ctx) {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.scale(this.scale, this.scale);
+        ctx.globalAlpha = this.alpha;
+        
+        // Draw broken bottle pieces
+        ctx.fillStyle = '#ff6b6b';
+        
+        // Main broken piece
+        ctx.fillRect(-12, -15, 24, 30);
+        
+        // Broken pieces scattered around
+        ctx.fillStyle = '#ff4444';
+        ctx.fillRect(-8, -20, 8, 8);
+        ctx.fillRect(5, -18, 6, 6);
+        ctx.fillRect(-6, 10, 10, 8);
+        ctx.fillRect(8, 12, 6, 6);
+        
+        // Glass shards
+        ctx.fillStyle = '#ffffff';
+        ctx.globalAlpha = this.alpha * 0.5;
+        ctx.fillRect(-10, -12, 4, 4);
+        ctx.fillRect(6, -10, 3, 3);
+        ctx.fillRect(-4, 8, 5, 4);
+        ctx.fillRect(10, 10, 3, 3);
+        
         ctx.restore();
     }
 }
