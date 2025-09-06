@@ -476,6 +476,7 @@ body {
     position: relative;
     flex-shrink: 0;
     clip-path: polygon(0% 0%, 100% 0%, 70% 100%, 30% 100%);
+    border-radius: 0 0 8px 8px; /* Rounded bottom corners */
 }
 
 .good-bottle {
@@ -493,25 +494,25 @@ body {
 .bottle-demo::after {
     content: '';
     position: absolute;
-    top: -8px;
+    top: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 16px;
-    height: 8px;
-    background: #ffffff;
+    width: 12px;
+    height: 12px;
+    background: inherit;
     border-radius: 2px;
 }
 
 .bottle-demo::before {
     content: '';
     position: absolute;
-    top: -12px;
+    top: -20px;
     left: 50%;
     transform: translateX(-50%);
-    width: 20px;
-    height: 4px;
-    background: #888888;
-    border-radius: 2px;
+    width: 16px;
+    height: 6px;
+    background: #8B4513;
+    border-radius: 3px;
 }
 
 .bottle-info {

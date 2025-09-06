@@ -572,33 +572,44 @@ class Bottle {
         ctx.closePath();
         ctx.fill();
         
+        // Add rounded bottom corners
+        ctx.beginPath();
+        ctx.arc(-20, 20, 3, 0, Math.PI / 2); // Bottom left corner
+        ctx.arc(20, 20, 3, Math.PI / 2, Math.PI); // Bottom right corner
+        ctx.fill();
+        
         // Draw glass outline
         ctx.strokeStyle = '#ffffff';
         ctx.lineWidth = 2;
         ctx.stroke();
         
-        // Draw neck of the flask
-        ctx.fillStyle = '#ffffff';
+        // Draw neck of the flask (straight tube section)
+        ctx.fillStyle = this.color;
         ctx.beginPath();
         ctx.moveTo(-8, -15);
-        ctx.lineTo(-6, -25);
-        ctx.lineTo(6, -25);
+        ctx.lineTo(-8, -25); // Extended straight section
+        ctx.lineTo(8, -25);
         ctx.lineTo(8, -15);
         ctx.closePath();
         ctx.fill();
         
-        // Draw neck outline
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
-        ctx.stroke();
+        // Draw top opening of the tube
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.moveTo(-6, -25);
+        ctx.lineTo(-6, -30);
+        ctx.lineTo(6, -30);
+        ctx.lineTo(6, -25);
+        ctx.closePath();
+        ctx.fill();
         
         // Draw stopper/cap
-        ctx.fillStyle = '#888888';
+        ctx.fillStyle = '#8B4513';
         ctx.beginPath();
-        ctx.moveTo(-8, -25);
-        ctx.lineTo(-10, -30);
-        ctx.lineTo(10, -30);
-        ctx.lineTo(8, -25);
+        ctx.moveTo(-6, -30);
+        ctx.lineTo(-8, -35);
+        ctx.lineTo(8, -35);
+        ctx.lineTo(6, -30);
         ctx.closePath();
         ctx.fill();
         
@@ -696,6 +707,12 @@ class BrokenBottle {
         ctx.lineTo(8, -8); // Top right (narrow)
         ctx.lineTo(12, 12); // Bottom right (wide)
         ctx.closePath();
+        ctx.fill();
+        
+        // Add rounded bottom corners for broken pieces
+        ctx.beginPath();
+        ctx.arc(-12, 12, 2, 0, Math.PI / 2); // Bottom left corner
+        ctx.arc(12, 12, 2, Math.PI / 2, Math.PI); // Bottom right corner
         ctx.fill();
         
         // Broken pieces scattered around (conical shapes)
