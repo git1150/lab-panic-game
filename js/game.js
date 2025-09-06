@@ -24,8 +24,8 @@ class LabPanicGame {
         
         // Spawn system
         this.spawnTimer = 0;
-        this.spawnRate = 1200; // ms tussen spawns (sneller starten)
-        this.maxBottles = 4; // Meer bottles direct
+        this.spawnRate = 1500; // ms tussen spawns (iets langzamer starten)
+        this.maxBottles = 3; // Minder bottles in het begin
         
         // Input handling
         this.mouseX = 0;
@@ -132,8 +132,8 @@ class LabPanicGame {
         this.activePowerup = null;
         this.powerupTimer = 0;
         this.spawnTimer = 0;
-        this.spawnRate = 1200; // Sneller starten
-        this.maxBottles = 4; // Meer bottles direct
+        this.spawnRate = 1500; // Iets langzamer starten
+        this.maxBottles = 3; // Minder bottles in het begin
         
         // Reset timing to prevent high speed start
         this.lastTime = Date.now();
@@ -169,7 +169,7 @@ class LabPanicGame {
         this.render();
         
         // Use setTimeout instead of requestAnimationFrame to prevent freezing when window loses focus
-        setTimeout(() => this.gameLoop(), 16); // ~60 FPS
+        setTimeout(() => this.gameLoop(), 8); // ~120 FPS voor soepelere animatie
     }
 
     update(deltaTime) {
@@ -203,14 +203,14 @@ class LabPanicGame {
     }
 
     updateDifficulty() {
-        const difficultyLevel = Math.floor(this.gameTime / 15000); // Elke 15 seconden (sneller)
-        this.difficulty = 1.5 + difficultyLevel * 0.8; // Hogere base difficulty
+        const difficultyLevel = Math.floor(this.gameTime / 15000); // Elke 15 seconden
+        this.difficulty = 1.2 + difficultyLevel * 0.8; // Iets lagere base difficulty
         
-        // Update spawn rate (sneller escaleren)
-        this.spawnRate = Math.max(300, 1200 - difficultyLevel * 200);
+        // Update spawn rate (geleidelijke escalatie)
+        this.spawnRate = Math.max(400, 1500 - difficultyLevel * 150);
         
-        // Update max bottles (sneller meer bottles)
-        this.maxBottles = Math.min(8, 4 + Math.floor(difficultyLevel / 1.5));
+        // Update max bottles (geleidelijke toename)
+        this.maxBottles = Math.min(8, 3 + Math.floor(difficultyLevel / 2));
     }
 
     updateSpawnSystem(deltaTime) {
@@ -545,9 +545,9 @@ class Bottle {
         this.type = type;
         this.color = color;
         this.radius = 25;
-        this.speed = 150 + difficulty * 80; // pixels per second (sneller starten)
+        this.speed = 120 + difficulty * 60; // pixels per second (iets langzamer starten)
         this.rotation = 0;
-        this.rotationSpeed = (Math.random() - 0.5) * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 1.5; // Iets langzamere rotatie
     }
 
     update(deltaTime) {
