@@ -16,6 +16,7 @@ body {
     justify-content: center;
     align-items: flex-start; /* Start from top instead of center */
     padding-top: 20px; /* Add some top padding */
+    scroll-behavior: auto; /* Disable smooth scrolling */
 }
 
 /* Allow scrolling on mobile devices */

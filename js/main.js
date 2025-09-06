@@ -96,6 +96,20 @@ class LabPanicApp {
             if (this.game && this.game.gameState === 'paused') {
                 this.game.resume();
             }
+            // Reset scroll position when window gains focus
+            this.resetScrollPosition();
+        });
+
+        // Reset scroll position on page load
+        window.addEventListener('load', () => {
+            this.resetScrollPosition();
+        });
+
+        // Reset scroll position when page becomes visible
+        document.addEventListener('visibilitychange', () => {
+            if (!document.hidden) {
+                this.resetScrollPosition();
+            }
         });
     }
 
@@ -206,6 +220,8 @@ class LabPanicApp {
         // Adjust height after loading leaderboards
         setTimeout(() => {
             this.adjustMainMenuHeight();
+            // Reset scroll position to top
+            this.resetScrollPosition();
         }, 100);
     }
 
@@ -322,6 +338,25 @@ class LabPanicApp {
     adjustMainMenuHeight() {
         // Alias for the new function
         this.forceMainMenuResize();
+    }
+
+    resetScrollPosition() {
+        // Reset scroll position to top for all scrollable elements
+        window.scrollTo(0, 0);
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+        
+        // Reset scroll position for the start screen
+        const startScreen = document.getElementById('startScreen');
+        if (startScreen) {
+            startScreen.scrollTop = 0;
+        }
+        
+        // Reset scroll position for leaderboard lists
+        const leaderboardLists = document.querySelectorAll('.leaderboard-list');
+        leaderboardLists.forEach(list => {
+            list.scrollTop = 0;
+        });
     }
     showGameOver(score) {
         this.switchScreen('gameOver');
@@ -484,6 +519,10 @@ class LabPanicApp {
     backToMenu() {
         this.switchScreen('start');
         this.loadLeaderboards();
+        // Reset scroll position when going back to menu
+        setTimeout(() => {
+            this.resetScrollPosition();
+        }, 50);
     }
 
     // Utility function to generate share slug
