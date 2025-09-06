@@ -14,7 +14,8 @@ body {
     width: 100vw;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Start from top instead of center */
+    padding-top: 20px; /* Add some top padding */
 }
 
 /* Allow scrolling on mobile devices */
@@ -82,11 +83,11 @@ body {
     
     /* Main menu screen - dynamic height */
     .screen#startScreen {
-        height: 800px; /* Much higher default height */
-        min-height: 800px;
-        max-height: 98vh; /* Allow almost full screen height */
+        height: 700px; /* Balanced height to show logo and all scores */
+        min-height: 700px;
+        max-height: 90vh; /* Allow most of screen height but leave room for top */
         overflow-y: auto;
-        padding: 20px 0 80px 0; /* Add extra bottom padding */
+        padding: 20px 0 60px 0; /* Add extra bottom padding */
         transition: height 0.3s ease;
     }
 }
@@ -234,15 +235,15 @@ body {
 /* Desktop leaderboard - dynamic height */
 @media (min-width: 769px) {
     .leaderboard-container {
-        max-height: 800px; /* Much higher to show all scores */
-        height: 700px; /* Much higher default height */
+        max-height: 600px; /* Balanced height to show all scores */
+        height: 500px; /* Balanced default height */
         margin: 1rem 0 2rem 0; /* Add extra bottom margin */
         transition: max-height 0.3s ease, height 0.3s ease;
         overflow: visible; /* Allow content to be visible */
     }
     
     .leaderboard-list {
-        max-height: 700px; /* Much higher to show all scores */
+        max-height: 500px; /* Balanced height to show all scores */
         transition: max-height 0.3s ease;
         overflow-y: auto; /* Allow scrolling if needed */
         padding-bottom: 20px; /* Extra padding at bottom */
