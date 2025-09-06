@@ -207,10 +207,30 @@ class LabPanicApp {
             finalScoreElement.textContent = score.toLocaleString();
         }
 
-        // Focus on name input
+        // Show name input container (in case it was hidden from previous save)
+        const nameInputContainer = document.querySelector('.name-input-container');
+        if (nameInputContainer) {
+            nameInputContainer.style.display = 'block';
+        }
+
+        // Reset submit button
+        const submitButton = document.getElementById('submitScore');
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Save Score';
+        }
+
+        // Clear name input
         const playerNameInput = document.getElementById('playerName');
         if (playerNameInput) {
+            playerNameInput.value = '';
             playerNameInput.focus();
+        }
+
+        // Hide share container
+        const shareContainer = document.getElementById('shareContainer');
+        if (shareContainer) {
+            shareContainer.style.display = 'none';
         }
     }
 
@@ -266,6 +286,12 @@ class LabPanicApp {
 
             // Show success message
             alert(`Score saved! You are ranked #${response.weekly_rank || '?'} in the weekly top!`);
+            
+            // Hide the name input and submit button after successful save
+            const nameInputContainer = document.querySelector('.name-input-container');
+            if (nameInputContainer) {
+                nameInputContainer.style.display = 'none';
+            }
             
             // Reload leaderboards
             this.loadLeaderboards();
