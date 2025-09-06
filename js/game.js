@@ -362,7 +362,14 @@ class LabPanicGame {
     }
 
     createBrokenBottle(x, y) {
-        const brokenBottle = new BrokenBottle(x, y);
+        // Adjust Y position based on screen size
+        let groundY = y;
+        if (window.innerWidth <= 768) {
+            // Mobile: use viewport height instead of canvas height
+            groundY = window.innerHeight - 30;
+        }
+        
+        const brokenBottle = new BrokenBottle(x, groundY);
         this.brokenBottles.push(brokenBottle);
     }
 
@@ -375,11 +382,17 @@ class LabPanicGame {
     cleanupObjects() {
         // Remove bottles that hit the ground
         this.bottles = this.bottles.filter(bottle => {
-            if (bottle.y > this.canvas.height + 50) {
+            // Calculate ground level based on screen size
+            let groundLevel = this.canvas.height + 50;
+            if (window.innerWidth <= 768) {
+                groundLevel = window.innerHeight + 50;
+            }
+            
+            if (bottle.y > groundLevel) {
                 if (bottle.type === 'dangerous') {
                     this.loseLife();
                     // Create broken bottle on the ground
-                    this.createBrokenBottle(bottle.x, this.canvas.height - 30);
+                    this.createBrokenBottle(bottle.x, 0); // Y will be calculated in createBrokenBottle
                 }
                 return false;
             }
