@@ -23,8 +23,8 @@ class LabPanicGame {
         
         // Spawn system
         this.spawnTimer = 0;
-        this.spawnRate = 2000; // ms tussen spawns
-        this.maxBottles = 3;
+        this.spawnRate = 1200; // ms tussen spawns (sneller starten)
+        this.maxBottles = 4; // Meer bottles direct
         
         // Input handling
         this.mouseX = 0;
@@ -115,8 +115,8 @@ class LabPanicGame {
         this.activePowerup = null;
         this.powerupTimer = 0;
         this.spawnTimer = 0;
-        this.spawnRate = 2000;
-        this.maxBottles = 3;
+        this.spawnRate = 1200; // Sneller starten
+        this.maxBottles = 4; // Meer bottles direct
         
         // Start session
         this.api.startSession().then(response => {
@@ -174,14 +174,14 @@ class LabPanicGame {
     }
 
     updateDifficulty() {
-        const difficultyLevel = Math.floor(this.gameTime / 30000); // Elke 30 seconden
-        this.difficulty = 1 + difficultyLevel * 0.5;
+        const difficultyLevel = Math.floor(this.gameTime / 15000); // Elke 15 seconden (sneller)
+        this.difficulty = 1.5 + difficultyLevel * 0.8; // Hogere base difficulty
         
-        // Update spawn rate
-        this.spawnRate = Math.max(500, 2000 - difficultyLevel * 300);
+        // Update spawn rate (sneller escaleren)
+        this.spawnRate = Math.max(300, 1200 - difficultyLevel * 200);
         
-        // Update max bottles
-        this.maxBottles = Math.min(6, 3 + Math.floor(difficultyLevel / 2));
+        // Update max bottles (sneller meer bottles)
+        this.maxBottles = Math.min(8, 4 + Math.floor(difficultyLevel / 1.5));
     }
 
     updateSpawnSystem(deltaTime) {
@@ -197,17 +197,17 @@ class LabPanicGame {
         const x = Math.random() * (this.canvas.width - 60) + 30;
         const y = -50;
         
-        // Determine bottle type
+        // Determine bottle type (uitdagender percentages)
         const rand = Math.random();
         let type, color;
         
-        if (rand < 0.05) { // 5% power-up
+        if (rand < 0.03) { // 3% power-up (zeldzamer)
             type = 'powerup';
             color = this.assets.bottleColors.powerup[Math.floor(Math.random() * 3)];
-        } else if (rand < 0.3) { // 25% dangerous
+        } else if (rand < 0.4) { // 37% dangerous (meer gevaarlijk)
             type = 'dangerous';
             color = this.assets.bottleColors.dangerous[Math.floor(Math.random() * 3)];
-        } else { // 70% good
+        } else { // 60% good (minder makkelijk)
             type = 'good';
             color = this.assets.bottleColors.good[Math.floor(Math.random() * 3)];
         }
@@ -488,7 +488,7 @@ class Bottle {
         this.type = type;
         this.color = color;
         this.radius = 25;
-        this.speed = 100 + difficulty * 50; // pixels per second
+        this.speed = 150 + difficulty * 80; // pixels per second (sneller starten)
         this.rotation = 0;
         this.rotationSpeed = (Math.random() - 0.5) * 2;
     }
