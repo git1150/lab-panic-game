@@ -133,6 +133,9 @@ class LabPanicGame {
         this.spawnRate = 1200; // Sneller starten
         this.maxBottles = 4; // Meer bottles direct
         
+        // Reset timing to prevent high speed start
+        this.lastTime = Date.now();
+        
         // Reset UI immediately
         this.updateUI();
         this.updatePowerupUI();
@@ -157,7 +160,10 @@ class LabPanicGame {
         const deltaTime = now - (this.lastTime || now);
         this.lastTime = now;
         
-        this.update(deltaTime);
+        // Cap deltaTime to prevent huge jumps when resuming
+        const cappedDeltaTime = Math.min(deltaTime, 100); // Max 100ms per frame
+        
+        this.update(cappedDeltaTime);
         this.render();
         
         // Use setTimeout instead of requestAnimationFrame to prevent freezing when window loses focus
