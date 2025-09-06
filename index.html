@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="nl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,28 +13,28 @@
         <div id="startScreen" class="screen active">
             <div class="title-container">
                 <h1 class="game-title">LAB PANIC</h1>
-                <div class="subtitle">Test je reflexen!</div>
+                <div class="subtitle">Test your reflexes!</div>
             </div>
             
-            <button id="startButton" class="btn btn-primary">START SPEL</button>
+            <button id="startButton" class="btn btn-primary">START GAME</button>
             
             <div class="leaderboard-tabs">
-                <button class="tab-btn active" data-tab="weekly">Top 25 Week</button>
-                <button class="tab-btn" data-tab="alltime">Top 25 All-Time</button>
+                <button class="tab-btn active" data-tab="weekly">Weekly Top 25</button>
+                <button class="tab-btn" data-tab="alltime">All-Time Top 25</button>
             </div>
             
             <div id="leaderboardContainer" class="leaderboard-container">
                 <div id="weeklyLeaderboard" class="leaderboard active">
-                    <h3>Weekelijkse Top 25</h3>
+                    <h3>Weekly Top 25</h3>
                     <div class="leaderboard-list" id="weeklyList">
-                        <div class="loading">Laden...</div>
+                        <div class="loading">Loading...</div>
                     </div>
                 </div>
                 
                 <div id="alltimeLeaderboard" class="leaderboard">
                     <h3>All-Time Top 25</h3>
                     <div class="leaderboard-list" id="alltimeList">
-                        <div class="loading">Laden...</div>
+                        <div class="loading">Loading...</div>
                     </div>
                 </div>
             </div>
@@ -68,26 +68,26 @@
             <div class="game-over-content">
                 <h2>Game Over!</h2>
                 <div class="final-score">
-                    <span>Eindscore: </span>
+                    <span>Final Score: </span>
                     <span id="finalScore">0</span>
                 </div>
                 
                 <div class="name-input-container">
-                    <label for="playerName">Jouw naam (max 12 tekens):</label>
-                    <input type="text" id="playerName" maxlength="12" placeholder="Jouw naam">
-                    <button id="submitScore" class="btn btn-primary">Score Opslaan</button>
+                    <label for="playerName">Your name (max 12 characters):</label>
+                    <input type="text" id="playerName" maxlength="12" placeholder="Your name">
+                    <button id="submitScore" class="btn btn-primary">Save Score</button>
                 </div>
                 
                 <div class="share-container" id="shareContainer" style="display: none;">
-                    <h4>Deel je score!</h4>
+                    <h4>Share your score!</h4>
                     <div class="share-url">
                         <input type="text" id="shareUrl" readonly>
-                        <button id="copyUrl" class="btn btn-secondary">Kopieer</button>
+                        <button id="copyUrl" class="btn btn-secondary">Copy</button>
                     </div>
                 </div>
                 
-                <button id="playAgain" class="btn btn-primary">Opnieuw Spelen</button>
-                <button id="backToMenu" class="btn btn-secondary">Terug naar Menu</button>
+                <button id="playAgain" class="btn btn-primary">Play Again</button>
+                <button id="backToMenu" class="btn btn-secondary">Back to Menu</button>
             </div>
         </div>
     </div>

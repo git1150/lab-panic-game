@@ -325,13 +325,13 @@ app.get('/share/:shareSlug', async (req, res) => {
     
     const html = `
     <!DOCTYPE html>
-    <html lang="nl">
+    <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Lab Panic - ${scoreEntry.player_name} Score</title>
         <meta property="og:title" content="Lab Panic - ${scoreEntry.player_name} Score">
-        <meta property="og:description" content="${scoreEntry.player_name} scoorde ${scoreEntry.score.toLocaleString()} punten in Lab Panic!">
+        <meta property="og:description" content="${scoreEntry.player_name} scored ${scoreEntry.score.toLocaleString()} points in Lab Panic!">
         <meta property="og:type" content="website">
         <meta property="og:url" content="${req.protocol}://${req.get('host')}${req.originalUrl}">
         <style>
@@ -385,9 +385,9 @@ app.get('/share/:shareSlug', async (req, res) => {
         <div class="share-card">
             <h1>Lab Panic</h1>
             <div class="player-name">${scoreEntry.player_name}</div>
-            <div class="score">${scoreEntry.score.toLocaleString()} punten</div>
-            <p>Speel nu en probeer deze score te verslaan!</p>
-            <a href="/" class="play-button">SPEEL NU</a>
+            <div class="score">${scoreEntry.score.toLocaleString()} points</div>
+            <p>Play now and try to beat this score!</p>
+            <a href="/" class="play-button">PLAY NOW</a>
         </div>
     </body>
     </html>

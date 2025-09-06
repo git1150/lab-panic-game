@@ -1,4 +1,4 @@
-// Hoofdapplicatie voor Lab Panic
+// Main application for Lab Panic
 class LabPanicApp {
     constructor() {
         this.game = null;
@@ -167,19 +167,19 @@ class LabPanicApp {
         if (!listElement) return;
 
         try {
-            listElement.innerHTML = '<div class="loading">Laden...</div>';
+            listElement.innerHTML = '<div class="loading">Loading...</div>';
             
             const data = await this.api.getLeaderboard(scope, 25);
             this.renderLeaderboard(listElement, data.entries || []);
         } catch (error) {
             console.error(`Failed to load ${scope} leaderboard:`, error);
-            listElement.innerHTML = '<div class="loading">Fout bij laden</div>';
+            listElement.innerHTML = '<div class="loading">Error loading</div>';
         }
     }
 
     renderLeaderboard(container, entries) {
         if (entries.length === 0) {
-            container.innerHTML = '<div class="loading">Geen scores beschikbaar</div>';
+            container.innerHTML = '<div class="loading">No scores available</div>';
             return;
         }
 
@@ -225,25 +225,25 @@ class LabPanicApp {
         
         // Validate player name
         if (!playerName) {
-            alert('Voer een naam in!');
+            alert('Please enter a name!');
             return;
         }
 
         if (playerName.length > 12) {
-            alert('Naam mag maximaal 12 tekens zijn!');
+            alert('Name must be maximum 12 characters!');
             return;
         }
 
         // Validate name format (alphanumeric + space / _ / -)
         const nameRegex = /^[a-zA-Z0-9\s_-]+$/;
         if (!nameRegex.test(playerName)) {
-            alert('Naam mag alleen letters, cijfers, spaties, _ en - bevatten!');
+            alert('Name can only contain letters, numbers, spaces, _ and -!');
             return;
         }
 
         // Disable submit button
         submitButton.disabled = true;
-        submitButton.textContent = 'Bezig...';
+        submitButton.textContent = 'Saving...';
 
         try {
             console.log('Submitting score:', {
@@ -265,7 +265,7 @@ class LabPanicApp {
             }
 
             // Show success message
-            alert(`Score opgeslagen! Je staat op plaats ${response.weekly_rank || '?'} in de weekelijkse top!`);
+            alert(`Score saved! You are ranked #${response.weekly_rank || '?'} in the weekly top!`);
             
             // Reload leaderboards
             this.loadLeaderboards();
@@ -278,22 +278,22 @@ class LabPanicApp {
                 gameScore: this.game.score
             });
             
-            let errorMessage = 'Fout bij opslaan van score. Probeer het opnieuw.';
+            let errorMessage = 'Error saving score. Please try again.';
             if (error.message.includes('Failed to fetch')) {
-                errorMessage = 'Kan geen verbinding maken met de server. Controleer of de server draait.';
+                errorMessage = 'Cannot connect to server. Please check if the server is running.';
             } else if (error.message.includes('INVALID_SESSION') || error.message.includes('SESSION_EXPIRED')) {
-                errorMessage = 'Sessie verlopen. Start het spel opnieuw.';
+                errorMessage = 'Session expired. Please restart the game.';
             } else if (error.message.includes('INVALID_NAME')) {
-                errorMessage = 'Ongeldige naam. Gebruik alleen letters, cijfers, spaties, _ en -.';
+                errorMessage = 'Invalid name. Use only letters, numbers, spaces, _ and -.';
             } else if (error.message.includes('Geen actieve sessie')) {
-                errorMessage = 'Probleem met sessie. Probeer het opnieuw.';
+                errorMessage = 'Session problem. Please try again.';
             }
             
             alert(errorMessage);
             
             // Re-enable submit button
             submitButton.disabled = false;
-            submitButton.textContent = 'Score Opslaan';
+            submitButton.textContent = 'Save Score';
         }
     }
 
@@ -306,13 +306,13 @@ class LabPanicApp {
 
         try {
             document.execCommand('copy');
-            alert('Link gekopieerd naar klembord!');
+            alert('Link copied to clipboard!');
         } catch (err) {
             // Fallback for modern browsers
             navigator.clipboard.writeText(shareUrlInput.value).then(() => {
-                alert('Link gekopieerd naar klembord!');
+                alert('Link copied to clipboard!');
             }).catch(() => {
-                alert('Kon link niet kopiëren. Kopieer handmatig: ' + shareUrlInput.value);
+                alert('Could not copy link. Copy manually: ' + shareUrlInput.value);
             });
         }
     }
@@ -356,6 +356,6 @@ if (shareParam) {
     // Show share info when page loads
     document.addEventListener('DOMContentLoaded', () => {
         const shareUrl = `${window.location.origin}/share/${shareParam}`;
-        alert(`Deel deze link: ${shareUrl}`);
+        alert(`Share this link: ${shareUrl}`);
     });
 }
