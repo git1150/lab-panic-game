@@ -96,7 +96,7 @@ body {
         position: relative;
         min-height: 100vh;
         height: auto;
-        padding: 20px 0;
+        padding: 20px 0 60px 0; /* Add extra bottom padding */
     }
 }
 
@@ -219,8 +219,14 @@ body {
 @media (max-width: 768px) {
     .leaderboard-container {
         width: 95%;
-        max-height: 300px;
+        max-height: 60vh; /* Use viewport height instead of fixed pixels */
         margin: 1rem 0;
+        padding-bottom: 2rem; /* Add extra padding at bottom */
+    }
+    
+    .leaderboard-list {
+        max-height: 50vh; /* Allow more space for the list */
+        padding-bottom: 1rem; /* Extra padding for last items */
     }
 }
 
@@ -556,6 +562,7 @@ body {
     
     .leaderboard-container {
         width: 95%;
+        margin-bottom: 2rem; /* Add extra margin at bottom */
     }
     
     .score-display {
