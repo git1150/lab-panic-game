@@ -560,33 +560,71 @@ class Bottle {
         ctx.translate(this.x, this.y);
         ctx.rotate(this.rotation);
         
-        // Draw bottle body
+        // Draw Erlenmeyer flask (conical shape)
         ctx.fillStyle = this.color;
-        ctx.fillRect(-15, -25, 30, 50);
         
-        // Draw bottle neck
+        // Main conical body of the flask
+        ctx.beginPath();
+        ctx.moveTo(-12, 20); // Bottom left
+        ctx.lineTo(-20, -15); // Top left (narrower)
+        ctx.lineTo(20, -15); // Top right (narrower)
+        ctx.lineTo(12, 20); // Bottom right
+        ctx.closePath();
+        ctx.fill();
+        
+        // Draw glass outline
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw neck of the flask
         ctx.fillStyle = '#ffffff';
-        ctx.fillRect(-8, -35, 16, 10);
+        ctx.beginPath();
+        ctx.moveTo(-8, -15);
+        ctx.lineTo(-6, -25);
+        ctx.lineTo(6, -25);
+        ctx.lineTo(8, -15);
+        ctx.closePath();
+        ctx.fill();
         
-        // Draw bottle cap
+        // Draw neck outline
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+        
+        // Draw stopper/cap
         ctx.fillStyle = '#888888';
-        ctx.fillRect(-10, -40, 20, 5);
+        ctx.beginPath();
+        ctx.moveTo(-8, -25);
+        ctx.lineTo(-10, -30);
+        ctx.lineTo(10, -30);
+        ctx.lineTo(8, -25);
+        ctx.closePath();
+        ctx.fill();
         
-        // Draw liquid
+        // Draw liquid inside the flask
         ctx.fillStyle = this.color;
-        ctx.fillRect(-12, -20, 24, 30);
+        ctx.globalAlpha = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(-10, 15); // Liquid level
+        ctx.lineTo(-18, -10);
+        ctx.lineTo(18, -10);
+        ctx.lineTo(10, 15);
+        ctx.closePath();
+        ctx.fill();
+        ctx.globalAlpha = 1;
         
         // Draw type indicator
         if (this.type === 'dangerous') {
             ctx.fillStyle = '#000000';
-            ctx.font = '16px Arial';
+            ctx.font = '14px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('☠', 0, 0);
+            ctx.fillText('☠', 0, 5);
         } else if (this.type === 'powerup') {
             ctx.fillStyle = '#000000';
-            ctx.font = '16px Arial';
+            ctx.font = '14px Arial';
             ctx.textAlign = 'center';
-            ctx.fillText('⭐', 0, 0);
+            ctx.fillText('⭐', 0, 5);
         }
         
         ctx.restore();
@@ -648,26 +686,88 @@ class BrokenBottle {
         ctx.scale(this.scale, this.scale);
         ctx.globalAlpha = this.alpha;
         
-        // Draw broken bottle pieces
+        // Draw broken Erlenmeyer flask pieces
         ctx.fillStyle = '#ff6b6b';
         
-        // Main broken piece
-        ctx.fillRect(-12, -15, 24, 30);
+        // Main broken conical piece
+        ctx.beginPath();
+        ctx.moveTo(-8, 12);
+        ctx.lineTo(-12, -8);
+        ctx.lineTo(12, -8);
+        ctx.lineTo(8, 12);
+        ctx.closePath();
+        ctx.fill();
         
-        // Broken pieces scattered around
+        // Broken pieces scattered around (conical shapes)
         ctx.fillStyle = '#ff4444';
-        ctx.fillRect(-8, -20, 8, 8);
-        ctx.fillRect(5, -18, 6, 6);
-        ctx.fillRect(-6, 10, 10, 8);
-        ctx.fillRect(8, 12, 6, 6);
         
-        // Glass shards
+        // Piece 1
+        ctx.beginPath();
+        ctx.moveTo(-6, -12);
+        ctx.lineTo(-8, -16);
+        ctx.lineTo(-2, -16);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Piece 2
+        ctx.beginPath();
+        ctx.moveTo(4, -10);
+        ctx.lineTo(2, -14);
+        ctx.lineTo(8, -14);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Piece 3
+        ctx.beginPath();
+        ctx.moveTo(-4, 8);
+        ctx.lineTo(-8, 4);
+        ctx.lineTo(2, 4);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Piece 4
+        ctx.beginPath();
+        ctx.moveTo(6, 10);
+        ctx.lineTo(2, 6);
+        ctx.lineTo(10, 6);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Glass shards (white highlights)
         ctx.fillStyle = '#ffffff';
-        ctx.globalAlpha = this.alpha * 0.5;
-        ctx.fillRect(-10, -12, 4, 4);
-        ctx.fillRect(6, -10, 3, 3);
-        ctx.fillRect(-4, 8, 5, 4);
-        ctx.fillRect(10, 10, 3, 3);
+        ctx.globalAlpha = this.alpha * 0.6;
+        
+        // Shard 1
+        ctx.beginPath();
+        ctx.moveTo(-6, -6);
+        ctx.lineTo(-4, -8);
+        ctx.lineTo(-2, -6);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Shard 2
+        ctx.beginPath();
+        ctx.moveTo(4, -4);
+        ctx.lineTo(6, -6);
+        ctx.lineTo(8, -4);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Shard 3
+        ctx.beginPath();
+        ctx.moveTo(-2, 6);
+        ctx.lineTo(-4, 4);
+        ctx.lineTo(0, 4);
+        ctx.closePath();
+        ctx.fill();
+        
+        // Shard 4
+        ctx.beginPath();
+        ctx.moveTo(8, 8);
+        ctx.lineTo(6, 6);
+        ctx.lineTo(10, 6);
+        ctx.closePath();
+        ctx.fill();
         
         ctx.restore();
     }
