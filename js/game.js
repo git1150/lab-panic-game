@@ -46,13 +46,28 @@ class LabPanicGame {
     }
 
     setupCanvas() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
+        // Set canvas dimensions based on screen size
+        if (window.innerWidth > 768) {
+            // Desktop: fixed dimensions
+            this.canvas.width = 800;
+            this.canvas.height = 600;
+        } else {
+            // Mobile: full screen
+            this.canvas.width = window.innerWidth;
+            this.canvas.height = window.innerHeight;
+        }
         
         // Handle resize
         window.addEventListener('resize', () => {
-            this.canvas.width = window.innerWidth;
-            this.canvas.height = window.innerHeight;
+            if (window.innerWidth > 768) {
+                // Desktop: fixed dimensions
+                this.canvas.width = 800;
+                this.canvas.height = 600;
+            } else {
+                // Mobile: full screen
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
         });
     }
 
