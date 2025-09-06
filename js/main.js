@@ -29,6 +29,18 @@ class LabPanicApp {
             startButton.addEventListener('click', () => this.startGame());
         }
 
+        // How to Play button
+        const howToPlayButton = document.getElementById('howToPlayButton');
+        if (howToPlayButton) {
+            howToPlayButton.addEventListener('click', () => this.showHowToPlay());
+        }
+
+        // Back to Menu button
+        const backToMenuButton = document.getElementById('backToMenuButton');
+        if (backToMenuButton) {
+            backToMenuButton.addEventListener('click', () => this.backToMenu());
+        }
+
         // Leaderboard tabs
         const tabButtons = document.querySelectorAll('.tab-btn');
         tabButtons.forEach(button => {
@@ -307,7 +319,6 @@ class LabPanicApp {
         // Alias for the new function
         this.forceMainMenuResize();
     }
-
     showGameOver(score) {
         this.switchScreen('gameOver');
         
@@ -460,6 +471,10 @@ class LabPanicApp {
             this.resetGameUI();
             this.game.startGame();
         }
+    }
+
+    showHowToPlay() {
+        this.switchScreen('howToPlay');
     }
 
     backToMenu() {

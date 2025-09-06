@@ -17,6 +17,7 @@
             </div>
             
             <button id="startButton" class="btn btn-primary">START GAME</button>
+            <button id="howToPlayButton" class="btn btn-secondary">HOW TO PLAY</button>
             
             <div class="leaderboard-tabs">
                 <button class="tab-btn active" data-tab="weekly">Weekly Top 25</button>
@@ -37,6 +38,63 @@
                         <div class="loading">Loading...</div>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <!-- How to Play Scherm -->
+        <div id="howToPlayScreen" class="screen">
+            <div class="how-to-play-content">
+                <h2>How to Play</h2>
+                
+                <div class="instructions">
+                    <p>Click or tap on the falling bottles to catch them!</p>
+                </div>
+                
+                <div class="bottle-types">
+                    <div class="bottle-type">
+                        <div class="bottle-demo good-bottle"></div>
+                        <div class="bottle-info">
+                            <h3>Green Bottles</h3>
+                            <p>Safe to catch! +10 points</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bottle-type">
+                        <div class="bottle-demo dangerous-bottle"></div>
+                        <div class="bottle-info">
+                            <h3>Red Bottles</h3>
+                            <p>Dangerous! +5 points but lose a life if they hit the ground</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bottle-type">
+                        <div class="bottle-demo powerup-bottle"></div>
+                        <div class="bottle-info">
+                            <h3>Gold Bottles</h3>
+                            <p>Power-ups! Special abilities to help you</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="powerups-info">
+                    <h3>Power-ups:</h3>
+                    <div class="powerup-list">
+                        <div class="powerup-item">
+                            <span class="powerup-icon">⏰</span>
+                            <span>Slow Motion - Slows down all bottles</span>
+                        </div>
+                        <div class="powerup-item">
+                            <span class="powerup-icon">💥</span>
+                            <span>Explosion - Destroys all bottles on screen</span>
+                        </div>
+                        <div class="powerup-item">
+                            <span class="powerup-icon">⭐</span>
+                            <span>Multiplier - Double points for 10 seconds</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <button id="backToMenuButton" class="btn btn-primary">Back to Menu</button>
             </div>
         </div>
 

@@ -423,6 +423,152 @@ body {
     font-size: 1rem;
 }
 
+/* How to Play Scherm */
+.how-to-play-content {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 2px solid #00ff88;
+    max-width: 600px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.how-to-play-content h2 {
+    color: #00ff88;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 20px #00ff88;
+}
+
+.instructions {
+    margin-bottom: 2rem;
+}
+
+.instructions p {
+    font-size: 1.2rem;
+    color: #88aaff;
+    margin-bottom: 1rem;
+}
+
+.bottle-types {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.bottle-type {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bottle-demo {
+    width: 40px;
+    height: 60px;
+    border-radius: 5px;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.good-bottle {
+    background: linear-gradient(to bottom, #00ff88, #00cc6a);
+}
+
+.dangerous-bottle {
+    background: linear-gradient(to bottom, #ff6b6b, #ff4444);
+}
+
+.powerup-bottle {
+    background: linear-gradient(to bottom, #ffd700, #ffb347);
+}
+
+.bottle-demo::after {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 8px;
+    background: #ffffff;
+    border-radius: 2px;
+}
+
+.bottle-demo::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 4px;
+    background: #888888;
+    border-radius: 2px;
+}
+
+.bottle-info {
+    text-align: left;
+    flex: 1;
+}
+
+.bottle-info h3 {
+    color: #00ff88;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.bottle-info p {
+    color: #ffffff;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.powerups-info {
+    margin-bottom: 2rem;
+}
+
+.powerups-info h3 {
+    color: #ffd700;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px #ffd700;
+}
+
+.powerup-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.powerup-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(255, 215, 0, 0.1);
+    padding: 0.8rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+}
+
+.powerup-icon {
+    font-size: 1.5rem;
+    width: 30px;
+    text-align: center;
+}
+
+.powerup-item span:last-child {
+    color: #ffffff;
+    font-size: 1rem;
+}
+
 /* Game Over Scherm */
 .game-over-content {
     text-align: center;
@@ -546,6 +692,31 @@ body {
     
     .final-score {
         font-size: 1.2rem;
+    }
+    
+    /* How to Play mobile styles */
+    .how-to-play-content {
+        max-width: 95%;
+        padding: 1.5rem;
+    }
+    
+    .how-to-play-content h2 {
+        font-size: 2rem;
+    }
+    
+    .bottle-type {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.8rem;
+    }
+    
+    .bottle-info {
+        text-align: center;
+    }
+    
+    .bottle-demo {
+        width: 35px;
+        height: 50px;
     }
 }
 
