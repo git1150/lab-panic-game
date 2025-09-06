@@ -165,6 +165,11 @@ class LabPanicApp {
             this.loadLeaderboard('weekly'),
             this.loadLeaderboard('alltime')
         ]);
+        
+        // Adjust height after loading leaderboards
+        setTimeout(() => {
+            this.adjustMainMenuHeight();
+        }, 100);
     }
 
     async loadLeaderboard(scope) {
@@ -240,7 +245,8 @@ class LabPanicApp {
         if (window.innerWidth <= 768) return;
         
         const mainMenu = document.getElementById('mainMenu');
-        if (!mainMenu) return;
+        const gameContainer = document.getElementById('gameContainer');
+        if (!mainMenu || !gameContainer) return;
         
         // Calculate total content height
         const titleContainer = mainMenu.querySelector('.title-container');
@@ -263,8 +269,10 @@ class LabPanicApp {
         const maxHeight = window.innerHeight * 0.9;
         const finalHeight = Math.max(minHeight, Math.min(totalHeight, maxHeight));
         
+        // Update both main menu and game container
         mainMenu.style.height = `${finalHeight}px`;
         mainMenu.style.minHeight = `${finalHeight}px`;
+        gameContainer.style.height = `${finalHeight}px`;
     }
 
     showGameOver(score) {
